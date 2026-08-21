@@ -100,36 +100,6 @@ Le rendu des graphiques SVG faits main (donut, barres de tendance) et les
 flux principaux (dashboard, CRUD transactions, budgets, récurrences) ont
 en plus été vérifiés visuellement par capture d'écran (Playwright).
 
-## Déploiement (Render + Neon)
-
-1. **Neon** : crée un projet Postgres gratuit sur [neon.tech](https://neon.tech),
-   récupère la `DATABASE_URL` (avec `?sslmode=require`).
-2. **Render** : crée un *Web Service* pointant sur ce repo.
-   - Build command : `npm ci --include=dev && npm run build:web && npm run db:migrate && npm run db:seed`
-     (`--include=dev` est nécessaire car `NODE_ENV=production` fait sinon
-     sauter les devDependencies, dont `vite` ; `db:seed` est idempotent —
-     il ne fait rien si le compte admin existe déjà — et permet de créer
-     les données initiales même sur le plan gratuit, qui n'a pas accès au
-     Shell/aux One-Off Jobs pour lancer la commande à la main.)
-   - Start command : `npm start`
-   - Variables d'environnement : `DATABASE_URL` (celle de Neon),
-     `SESSION_SECRET` (valeur aléatoire), `NODE_ENV=production`,
-     `SEED_USER_EMAIL` / `SEED_USER_PASSWORD` / `SEED_USER_NAME`.
-3. Le plan gratuit de Render met le service en veille après 15 min
-   d'inactivité (le réveil prend ~1 min) — sans conséquence sur les
-   transactions récurrentes, qui se rattrapent automatiquement au réveil.
-
-Le serveur active `app.set("trust proxy", 1)` en production dès le
-premier commit (Render, comme Heroku/Railway, termine le HTTPS à son
-niveau et transmet la requête en HTTP en interne ; sans ce réglage,
-Express refuse silencieusement de poser le cookie de session marqué
-`secure: true`, et l'utilisateur reste déconnecté juste après un login
-qui semble pourtant réussi — bug rencontré et corrigé après coup sur Task
-Manager, évité ici dès le départ).
-
-Aucune configuration Docker nécessaire : Render détecte Node.js et utilise
-directement les commandes ci-dessus.
-
 ## Licence
 
 MIT — voir [LICENSE](./LICENSE).

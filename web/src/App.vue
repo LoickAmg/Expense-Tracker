@@ -17,14 +17,14 @@ async function handleLogout() {
 <template>
   <div class="app-shell">
     <header v-if="showTopbar" class="topbar">
-      <router-link to="/" class="brand">💰 Expense Tracker</router-link>
+      <router-link to="/" class="brand">Ledger / Dépenses</router-link>
       <nav class="topnav">
         <router-link to="/" exact-active-class="active">Dashboard</router-link>
         <router-link to="/transactions" active-class="active">Transactions</router-link>
         <router-link to="/settings" active-class="active">Paramètres</router-link>
       </nav>
       <div class="topbar-user">
-        <span>{{ auth.user?.name }}</span>
+        <span class="topbar-greeting">{{ auth.user?.name }}</span>
         <button class="btn-ghost" @click="handleLogout">Déconnexion</button>
       </div>
     </header>

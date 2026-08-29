@@ -11,15 +11,10 @@ frontend **Vue 3** (Composition API) + **Pinia** + **Vite**, graphiques SVG
 faits main (aucune librairie de charting), sans framework CSS (thème
 sombre écrit à la main, repris du projet Task Manager).
 
-> La roadmap prévoyait Laravel (PHP) + une BDD relationnelle. Le backend a
-> été pivoté vers Node/Express dès le départ : l'installateur PHP
-> (Composer/Packagist) n'est accessible ni dans mon environnement de
-> build, ni via le pont vers la machine de l'utilisateur (ni PHP ni
-> Composer n'y sont installés, et l'accès réseau y est également
-> restreint) — même situation déjà rencontrée sur Manga Quoting et Task
-> Manager. Drizzle (plutôt que Prisma) est utilisé pour la même raison :
-> Prisma télécharge un moteur binaire natif, bloqué ici, alors que
-> Drizzle génère du SQL pur.
+> **Choix d’architecture.** Le backend Node/Express et Drizzle ont été retenus
+> pour garder une API légère, explicite et facilement déployable avec PostgreSQL.
+> Le domaine métier est séparé des routes HTTP : les calculs de périodes et le
+> rattrapage des récurrences peuvent donc être testés indépendamment de la base.
 
 ## Fonctionnalités
 
@@ -99,6 +94,12 @@ pur (`recurringDates.test.js`) et en intégration via
 Le rendu des graphiques SVG faits main (donut, barres de tendance) et les
 flux principaux (dashboard, CRUD transactions, budgets, récurrences) ont
 en plus été vérifiés visuellement par capture d'écran (Playwright).
+
+## Permissions et limites
+
+L’authentification est actuellement mono-utilisateur : la session protège l’accès au compte, mais il n’existe pas encore de partage de budget ni de rôle multi-utilisateur. Les routes doivent néanmoins conserver leurs contrôles d’identité afin que l’évolution vers plusieurs comptes ne rende pas les données existantes accessibles par identifiant prévisible. Les tests d’intégration PostgreSQL vérifient les chemins d’authentification et les erreurs de validation ; les seeders ne doivent être utilisés qu’en développement.
+
+Les valeurs `admin@example.com` et `changeme123` sont des identifiants de démonstration documentés pour le local. Il faut les remplacer via `SEED_USER_*` avant toute instance accessible sur un réseau et ne jamais réutiliser le mot de passe seedé en production. Les secrets de session et `DATABASE_URL` restent des variables d’environnement, absentes du dépôt.
 
 ## Licence
 

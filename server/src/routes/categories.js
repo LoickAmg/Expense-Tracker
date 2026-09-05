@@ -85,7 +85,12 @@ categoriesRouter.delete(
     } catch (err) {
       // Contrainte FK (transactions.categoryId → restrict) : on refuse la
       // suppression plutôt que de laisser des transactions orphelines.
-      if (pgErrorCode(err) === "23503") {
+      // Postgres distingue deux SQLSTATE pour les FK : "23503"
+      // (foreign_key_violation, ex. NO ACTION) et "23001"
+      // (restrict_violation, levé spécifiquement par ON DELETE RESTRICT —
+      // c'est celui-ci que la contrainte du schéma déclenche réellement).
+      const code = pgErrorCode(err);
+      if (code === "23503" || code === "23001") {
         return res
           .status(409)
           .json({ error: "Catégorie utilisée par des transactions : supprime-les d'abord, ou renomme la catégorie." });

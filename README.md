@@ -9,12 +9,25 @@ App de suivi de dépenses/revenus personnels : catégories, transactions,
 Backend **Node.js/Express** (API REST) + **Drizzle ORM** + **PostgreSQL**,
 frontend **Vue 3** (Composition API) + **Pinia** + **Vite**, graphiques SVG
 faits main (aucune librairie de charting), sans framework CSS (thème
-sombre écrit à la main, repris du projet Task Manager).
+clair « papier / encre » écrit à la main).
 
 > **Choix d’architecture.** Le backend Node/Express et Drizzle ont été retenus
 > pour garder une API légère, explicite et facilement déployable avec PostgreSQL.
 > Le domaine métier est séparé des routes HTTP : les calculs de périodes et le
 > rattrapage des récurrences peuvent donc être testés indépendamment de la base.
+
+### Système de design
+
+- **Police** : IBM Plex Sans, auto-hébergée (`@fontsource`) — corps lisible pour
+  un tableau de bord financier, formant un système typographique cohérent et
+  distinctif par rapport aux réflexes Inter/Space Grotesk. Aucune dépendance à
+  Google Fonts.
+- **Palette nommée** (`web/src/style.css` → `:root`) : `--bg`, `--bg-card`,
+  `--accent`, `--danger`, `--danger-bg`, etc. — toutes les couleurs passent par
+  des tokens, aucune valeur hexadécimale jetée dans le CSS.
+- **Pages légales** : `/mention-legales`, `/confidentialite`, `/contact`
+  (+ route catch-all `/404`). ⚠️ Compléter les champs `[À compléter]` et
+  l'email de contact avant mise en production.
 
 ## Fonctionnalités
 

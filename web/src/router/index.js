@@ -6,6 +6,15 @@ const routes = [
   { path: "/", name: "dashboard", component: () => import("@/views/DashboardView.vue") },
   { path: "/transactions", name: "transactions", component: () => import("@/views/TransactionsView.vue") },
   { path: "/settings", name: "settings", component: () => import("@/views/SettingsView.vue") },
+  { path: "/mention-legales", name: "mentions", component: () => import("@/views/LegalView.vue"), props: { page: "mentions-legales" }, meta: { public: true } },
+  { path: "/confidentialite", name: "confidentialite", component: () => import("@/views/LegalView.vue"), props: { page: "confidentialite" }, meta: { public: true } },
+  { path: "/contact", name: "contact", component: () => import("@/views/LegalView.vue"), props: { page: "contact" }, meta: { public: true } },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("@/views/NotFoundView.vue"),
+    meta: { public: true },
+  },
 ];
 
 export const router = createRouter({

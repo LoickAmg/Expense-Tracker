@@ -31,6 +31,14 @@ async function handleLogout() {
     <main class="app-main">
       <router-view />
     </main>
+    <footer class="app-legal">
+      <span>Ledger / Dépenses</span>
+      <nav>
+        <router-link to="/mention-legales">Mentions légales</router-link>
+        <router-link to="/confidentialite">Confidentialité</router-link>
+        <router-link to="/contact">Contact</router-link>
+      </nav>
+    </footer>
   </div>
 </template>
 
@@ -51,5 +59,31 @@ async function handleLogout() {
 .topnav a.active {
   color: var(--text);
   border-bottom-color: var(--accent);
+}
+
+.app-legal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.app-legal nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.app-legal a {
+  color: var(--text-dim);
+  text-decoration: none;
+}
+
+.app-legal a:hover {
+  color: var(--accent);
 }
 </style>

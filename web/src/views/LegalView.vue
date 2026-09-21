@@ -8,19 +8,19 @@ const props = defineProps({
 const pages = {
   "mentions-legales": {
     title: "Mentions légales",
-    updated: "En vigueur au 31 août 2026",
+    updated: "En vigueur au 21 septembre 2026",
     sections: [
       {
         h: "Éditeur du site",
         body: [
           "« Ledger / Dépenses » est une application de gestion de budget personnel, réalisée en démonstration technique.",
-          "Éditeur : [À compléter — nom ou pseudo] ([À compléter — adresse]). Contact : contact@exemple.fr.",
+          "Éditeur : Mahouna (éditeur non professionnel ; adresse postale non publiée, communiquée à l'hébergeur (loi n° 2004-575 du 21 juin 2004, art. 6, III, 2°)). Contact : mahounaamg@gmail.com.",
         ],
       },
       {
         h: "Hébergement",
         body: [
-          "L'application et son API sont hébergées sur [À compléter — service d'hébergement].",
+          "Le code source est publié sur GitHub (github.com/LoickAmg/Expense-Tracker). Le nom de l'hébergeur du service en ligne sera indiqué ici dès sa mise en production.",
         ],
       },
       {
@@ -33,7 +33,7 @@ const pages = {
   },
   confidentialite: {
     title: "Politique de confidentialité",
-    updated: "En vigueur au 31 août 2026",
+    updated: "En vigueur au 21 septembre 2026",
     sections: [
       {
         h: "Données collectées",
@@ -51,7 +51,7 @@ const pages = {
       {
         h: "Vos droits (RGPD)",
         body: [
-          "Conformément au RGPD, vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à : contact@exemple.fr.",
+          "Conformément au RGPD, vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à : mahounaamg@gmail.com.",
         ],
       },
     ],
@@ -63,7 +63,7 @@ const pages = {
       {
         h: "Nous écrire",
         body: [
-          "Pour toute question, demande de correction ou de suppression de données : contact@exemple.fr.",
+          "Pour toute question, demande de correction ou de suppression de données : mahounaamg@gmail.com.",
           "Nous nous efforçons de répondre sous 5 jours ouvrés.",
         ],
       },

@@ -26,8 +26,7 @@ clair « papier / encre » écrit à la main).
   `--accent`, `--danger`, `--danger-bg`, etc. — toutes les couleurs passent par
   des tokens, aucune valeur hexadécimale jetée dans le CSS.
 - **Pages légales** : `/mention-legales`, `/confidentialite`, `/contact`
-  (+ route catch-all `/404`). ⚠️ Compléter les champs `[À compléter]` et
-  l'email de contact avant mise en production.
+  (+ route catch-all `/404`). Éditeur (Mahouna, non professionnel), contact (mahounaamg@gmail.com) et mention d'hébergement sont renseignés dans `web/src/views/LegalView.vue`. L'hébergeur du service en ligne est à préciser dans la page dès sa mise en production.
 
 ## Fonctionnalités
 

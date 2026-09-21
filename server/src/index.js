@@ -6,6 +6,8 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieSession from "cookie-session";
 
+import { resolveSessionSecret } from "./lib/sessionSecret.js";
+
 import { authRouter } from "./routes/auth.js";
 import { categoriesRouter } from "./routes/categories.js";
 import { transactionsRouter } from "./routes/transactions.js";
@@ -42,7 +44,7 @@ export function createApp() {
   app.use(
     cookieSession({
       name: "session",
-      secret: process.env.SESSION_SECRET || "dev-secret-change-me",
+      secret: resolveSessionSecret(),
       httpOnly: true,
       sameSite: "lax",
       secure: isProd,

@@ -5,8 +5,10 @@ import { eq } from "drizzle-orm";
 import { db } from "../db/client.js";
 import { users } from "../db/schema.js";
 import { requireAuth } from "../middleware/requireAuth.js";
+import { createLoginThrottle } from "../middleware/loginThrottle.js";
 
 export const authRouter = Router();
+const loginThrottle = createLoginThrottle();
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -17,7 +19,7 @@ function publicUser(user) {
   return { id: user.id, email: user.email, name: user.name };
 }
 
-authRouter.post("/login", async (req, res) => {
+authRouter.post("/login", loginThrottle, async (req, res) => {
   const parsed = loginSchema.safeParse(req.body);
   if (!parsed.success) {
     return res.status(400).json({ error: "Email et mot de passe requis." });
